@@ -57,6 +57,7 @@ func MiscWithContext(ctx context.Context) (*MiscStat, error) {
 
 	ret := MiscStat{}
 	for _, l := range lines {
+		ret.ProcsTotal++
 		if strings.Contains(l, "R") {
 			ret.ProcsRunning++
 		} else if strings.Contains(l, "D") {

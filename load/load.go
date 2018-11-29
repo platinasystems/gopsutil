@@ -20,9 +20,14 @@ func (l AvgStat) String() string {
 }
 
 type MiscStat struct {
-	ProcsRunning int `json:"procsRunning"`
-	ProcsBlocked int `json:"procsBlocked"`
-	Ctxt         int `json:"ctxt"`
+	ProcsTotal    int `json:"procsTotal"`
+	ProcsRunning  int `json:"procsRunning"`
+	ProcsBlocked  int `json:"procsBlocked"`
+	ProcsStopped  int `json:"procsStopped"`
+	ProcsSleeping int `json:"procsSleeping"`
+	ProcsIdle     int `json:"procsIdle"`
+	ProcsZombie   int `json:"procsZombie"`
+	Ctxt          int `json:"ctxt"`
 }
 
 func (m MiscStat) String() string {

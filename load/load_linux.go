@@ -52,6 +52,27 @@ func Misc() (*MiscStat, error) {
 	return MiscWithContext(context.Background())
 }
 
+//From "ps" man page
+//PROCESS STATE CODES
+//       Here are the different values that the s, stat and state output specifiers (header "STAT" or "S") will display to describe the state of a process:
+//
+//               D    uninterruptible sleep (usually IO)
+//               R    running or runnable (on run queue)
+//               S    interruptible sleep (waiting for an event to complete)
+//               T    stopped by job control signal
+//               t    stopped by debugger during the tracing
+//               W    paging (not valid since the 2.6.xx kernel)
+//               X    dead (should never be seen)
+//               Z    defunct ("zombie") process, terminated but not reaped by its parent
+//
+//       For BSD formats and when the stat keyword is used, additional characters may be displayed:
+//
+//               <    high-priority (not nice to other users)
+//               N    low-priority (nice to other users)
+//               L    has pages locked into memory (for real-time and custom IO)
+//               s    is a session leader
+//               l    is multi-threaded (using CLONE_THREAD, like NPTL pthreads do)
+//               +    is in the foreground process group
 func MiscWithContext(ctx context.Context) (*MiscStat, error) {
 	filename := common.HostProc("stat")
 	out, err := ioutil.ReadFile(filename)
@@ -81,6 +102,31 @@ func MiscWithContext(ctx context.Context) (*MiscStat, error) {
 			continue
 		}
 
+	}
+
+	bin, err := exec.LookPath("ps")
+	if err != nil {
+		return nil, err
+	}
+	out, err := invoke.CommandWithContext(ctx, bin, "axo", "state")
+	if err != nil {
+		return nil, err
+	}
+	lines := strings.Split(string(out), "\n")
+
+	ret := MiscStat{}
+	for _, l := range lines {
+		if l == "" {
+			continue
+		}
+		ret.ProcsTotal++
+		if strings.HasPrefix(l, "Z") {
+			ret.ProcsZombie++
+		} else if strings.HasPrefix(l, "T") || strings.HasPrefix(l, "t") {
+			ret.ProcsStopped++
+		} else if strings.HasPrefix(l, "S") {
+			ret.ProcsSleeping++
+		}
 	}
 
 	return ret, nil
