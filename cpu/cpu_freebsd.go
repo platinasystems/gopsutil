@@ -10,7 +10,7 @@ import (
 	"strings"
 	"unsafe"
 
-	"github.com/shirou/gopsutil/internal/common"
+	"github.com/gregorycallea/gopsutil/internal/common"
 	"golang.org/x/sys/unix"
 )
 

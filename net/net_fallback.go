@@ -5,7 +5,7 @@ package net
 import (
 	"context"
 
-	"github.com/shirou/gopsutil/internal/common"
+	"github.com/gregorycallea/gopsutil/internal/common"
 )
 
 func IOCounters(pernic bool) ([]IOCountersStat, error) {

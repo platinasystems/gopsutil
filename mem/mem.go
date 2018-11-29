@@ -3,7 +3,7 @@ package mem
 import (
 	"encoding/json"
 
-	"github.com/shirou/gopsutil/internal/common"
+	"github.com/gregorycallea/gopsutil/internal/common"
 )
 
 var invoke common.Invoker = common.Invoke{}
@@ -44,7 +44,7 @@ type VirtualMemoryStat struct {
 
 	// FreeBSD specific numbers:
 	// https://reviews.freebsd.org/D8467
-	Laundry  uint64 `json:"laundry"`
+	Laundry uint64 `json:"laundry"`
 
 	// Linux specific numbers
 	// https://www.centos.org/docs/5/html/5.1/Deployment_Guide/s2-proc-meminfo.html
