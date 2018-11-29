@@ -5,6 +5,7 @@ package load
 import (
 	"context"
 	"io/ioutil"
+	"os/exec"
 	"strconv"
 	"strings"
 
@@ -108,13 +109,12 @@ func MiscWithContext(ctx context.Context) (*MiscStat, error) {
 	if err != nil {
 		return nil, err
 	}
-	out, err := invoke.CommandWithContext(ctx, bin, "axo", "state")
+	out, err = invoke.CommandWithContext(ctx, bin, "axo", "state")
 	if err != nil {
 		return nil, err
 	}
-	lines := strings.Split(string(out), "\n")
+	lines = strings.Split(string(out), "\n")
 
-	ret := MiscStat{}
 	for _, l := range lines {
 		if l == "" {
 			continue
