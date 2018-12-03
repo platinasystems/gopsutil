@@ -72,6 +72,11 @@ func InfoWithContext(ctx context.Context) (*InfoStat, error) {
 		ret.Procs = numProcs
 	}
 
+	loggedUsers, err := LoggedUsers()
+	if err == nil {
+		ret.LoggedUsers = uint64(loggedUsers)
+	}
+
 	sysProductUUID := common.HostSys("class/dmi/id/product_uuid")
 	machineID := common.HostEtc("machine-id")
 	switch {
@@ -614,6 +619,25 @@ func VirtualizationWithContext(ctx context.Context) (string, string, error) {
 		}
 	}
 	return system, role, nil
+}
+
+func LoggedUsers() (int, error) {
+	return LoggedUsersWithContext(context.Background())
+}
+
+func LoggedUsersWithContext(ctx context.Context) (int, error) {
+
+	bin, err := exec.LookPath("who")
+	if err != nil {
+		return -1, err
+	}
+	out, err := invoke.CommandWithContext(ctx, bin, "-u")
+	if err != nil {
+		return -1, err
+	}
+
+	return len(strings.Split(string(out), "\n")), err
+
 }
 
 func SensorsTemperatures() ([]TemperatureStat, error) {

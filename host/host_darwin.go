@@ -72,6 +72,11 @@ func InfoWithContext(ctx context.Context) (*InfoStat, error) {
 		ret.HostID = strings.ToLower(values[0])
 	}
 
+	loggedUsers, err := LoggedUsers()
+	if err == nil {
+		ret.LoggedUsers = uint64(loggedUsers)
+	}
+
 	return ret, nil
 }
 
@@ -204,6 +209,25 @@ func Virtualization() (string, string, error) {
 
 func VirtualizationWithContext(ctx context.Context) (string, string, error) {
 	return "", "", common.ErrNotImplementedError
+}
+
+func LoggedUsers() (int, error) {
+	return LoggedUsersWithContext(context.Background())
+}
+
+func LoggedUsersWithContext(ctx context.Context) (int, error) {
+
+	bin, err := exec.LookPath("who")
+	if err != nil {
+		return -1, err
+	}
+	out, err := invoke.CommandWithContext(ctx, bin, "-u")
+	if err != nil {
+		return -1, err
+	}
+
+	return len(strings.Split(string(out), "\n")), err
+
 }
 
 func KernelVersion() (string, error) {
