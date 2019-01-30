@@ -29,6 +29,7 @@ type TimesStat struct {
 	Guest     float64 `json:"guest"`
 	GuestNice float64 `json:"guestNice"`
 	Stolen    float64 `json:"stolen"`
+	TotalCpu  float64 `json:"totalCpu"`
 }
 
 type InfoStat struct {
