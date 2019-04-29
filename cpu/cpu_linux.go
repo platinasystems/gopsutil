@@ -250,13 +250,13 @@ func parseStatLine(line string) (*TimesStat, error) {
 
 	ct := &TimesStat{
 		CPU:     cpu,
-		User:    user / CPUTick,
-		Nice:    nice / CPUTick,
-		System:  system / CPUTick,
-		Idle:    idle / CPUTick,
-		Iowait:  iowait / CPUTick,
-		Irq:     irq / CPUTick,
-		Softirq: softirq / CPUTick,
+		User:    user,
+		Nice:    nice,
+		System:  system,
+		Idle:    idle,
+		Iowait:  iowait,
+		Irq:     irq,
+		Softirq: softirq,
 	}
 	var totalCpu float64
 	totalCpu = float64(totalCpu) + ct.User
@@ -266,12 +266,13 @@ func parseStatLine(line string) (*TimesStat, error) {
 	totalCpu = float64(totalCpu) + ct.Iowait
 	totalCpu = float64(totalCpu) + ct.Irq
 	totalCpu = float64(totalCpu) + ct.Softirq
+	totalCpu = float64(totalCpu) + ct.Stolen
 	if len(fields) > 8 { // Linux >= 2.6.11
 		steal, err := strconv.ParseFloat(fields[8], 64)
 		if err != nil {
 			return nil, err
 		}
-		ct.Steal = steal / CPUTick
+		ct.Steal = steal
 		totalCpu = float64(totalCpu) + ct.Steal
 	}
 	if len(fields) > 9 { // Linux >= 2.6.24
@@ -279,7 +280,7 @@ func parseStatLine(line string) (*TimesStat, error) {
 		if err != nil {
 			return nil, err
 		}
-		ct.Guest = guest / CPUTick
+		ct.Guest = guest
 		totalCpu = float64(totalCpu) + ct.Guest
 	}
 	if len(fields) > 10 { // Linux >= 3.2.0
@@ -287,7 +288,7 @@ func parseStatLine(line string) (*TimesStat, error) {
 		if err != nil {
 			return nil, err
 		}
-		ct.GuestNice = guestNice / CPUTick
+		ct.GuestNice = guestNice
 		totalCpu = float64(totalCpu) + ct.GuestNice
 	}
 

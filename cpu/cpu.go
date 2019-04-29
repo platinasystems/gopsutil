@@ -86,6 +86,7 @@ func (c TimesStat) String() string {
 		`"guest":` + strconv.FormatFloat(c.Guest, 'f', 1, 64),
 		`"guestNice":` + strconv.FormatFloat(c.GuestNice, 'f', 1, 64),
 		`"stolen":` + strconv.FormatFloat(c.Stolen, 'f', 1, 64),
+		`"totalCPU":` + strconv.FormatFloat(c.TotalCpu, 'f', 1, 64),
 	}
 
 	return `{` + strings.Join(v, ",") + `}`
