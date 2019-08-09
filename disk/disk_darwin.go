@@ -7,7 +7,7 @@ import (
 	"path"
 	"unsafe"
 
-	"github.com/gregorycallea/gopsutil/internal/common"
+	"github.com/platinasystems/gopsutil/internal/common"
 	"golang.org/x/sys/unix"
 )
 

@@ -10,10 +10,10 @@ import (
 	"strings"
 	"unsafe"
 
-	cpu "github.com/gregorycallea/gopsutil/cpu"
-	"github.com/gregorycallea/gopsutil/internal/common"
-	mem "github.com/gregorycallea/gopsutil/mem"
-	net "github.com/gregorycallea/gopsutil/net"
+	cpu "github.com/platinasystems/gopsutil/cpu"
+	"github.com/platinasystems/gopsutil/internal/common"
+	mem "github.com/platinasystems/gopsutil/mem"
+	net "github.com/platinasystems/gopsutil/net"
 	"golang.org/x/sys/unix"
 )
 

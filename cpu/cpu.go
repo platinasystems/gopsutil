@@ -4,13 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/platinasystems/gopsutil/internal/common"
 	"runtime"
 	"strconv"
 	"strings"
 	"sync"
 	"time"
-
-	"github.com/gregorycallea/gopsutil/internal/common"
 )
 
 // TimesStat contains the amounts of time the CPU has spent performing different

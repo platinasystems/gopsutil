@@ -7,9 +7,9 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/gregorycallea/gopsutil/cpu"
-	"github.com/gregorycallea/gopsutil/internal/common"
-	"github.com/gregorycallea/gopsutil/mem"
+	"github.com/platinasystems/gopsutil/cpu"
+	"github.com/platinasystems/gopsutil/internal/common"
+	"github.com/platinasystems/gopsutil/mem"
 )
 
 var (

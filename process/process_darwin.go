@@ -13,9 +13,9 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/gregorycallea/gopsutil/cpu"
-	"github.com/gregorycallea/gopsutil/internal/common"
-	"github.com/gregorycallea/gopsutil/net"
+	"github.com/platinasystems/gopsutil/cpu"
+	"github.com/platinasystems/gopsutil/internal/common"
+	"github.com/platinasystems/gopsutil/net"
 	"golang.org/x/sys/unix"
 )
 

@@ -15,7 +15,7 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/gregorycallea/gopsutil/internal/common"
+	"github.com/platinasystems/gopsutil/internal/common"
 )
 
 // NetIOCounters returnes network I/O statistics for every network
@@ -661,7 +661,7 @@ func processInet(file string, kind netConnectionKindType, inodes map[string][]in
 	// Read the contents of the /proc file with a single read sys call.
 	// This minimizes duplicates in the returned connections
 	// For more info:
-	// https://github.com/gregorycallea/gopsutil/pull/361
+	// https://github.com/platinasystems/gopsutil/pull/361
 	contents, err := ioutil.ReadFile(file)
 	if err != nil {
 		return nil, err
@@ -722,7 +722,7 @@ func processUnix(file string, kind netConnectionKindType, inodes map[string][]in
 	// Read the contents of the /proc file with a single read sys call.
 	// This minimizes duplicates in the returned connections
 	// For more info:
-	// https://github.com/gregorycallea/gopsutil/pull/361
+	// https://github.com/platinasystems/gopsutil/pull/361
 	contents, err := ioutil.ReadFile(file)
 	if err != nil {
 		return nil, err
